@@ -89,10 +89,7 @@ namespace ClientHostInfo
             if (Calls.Players.IsHost())
             {
                 _infoPanel = Calls.Create.NewText("Host", 10f, Color.yellow,
-                    new Vector3(0f, 2.75f, -11f), Quaternion.Euler(0, 183f, 0));
-                
-                _infoPanel = Calls.Create.NewText("Host", 10f, Color.yellow,
-                    new Vector3(0f, 2.75f, -11f), Quaternion.Euler(0, 183f, 0));
+                    new Vector3(0f, 2.75f, -11f), Quaternion.Euler(0, 183f, 0)); 
                 
                 // _infoPanel.transform.parent = (GameObject.Find("/Health").transform);
 
@@ -101,9 +98,6 @@ namespace ClientHostInfo
             }
             else
             {
-                _infoPanel = Calls.Create.NewText("Client", 10f, Color.yellow, 
-                    new Vector3(0f, 2.75f, 11f), Quaternion.Euler(0, 12, 0));
-                
                 _infoPanel = Calls.Create.NewText("Client", 10f, Color.yellow, 
                     new Vector3(0f, 2.75f, 11f), Quaternion.Euler(0, 12, 0));
                 
