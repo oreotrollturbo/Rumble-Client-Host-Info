@@ -51,9 +51,9 @@ namespace ClientHostInfo
 
             switch (_currentSceneName)
             {
-                case "Gym":
-                    GymInit();
-                    break;
+                // case "Gym":
+                //     GymInit();
+                //     break;
 
                 case "Map0":
                     Map0Init();
@@ -78,12 +78,12 @@ namespace ClientHostInfo
             _infoPanel.SetActive(false);
         }
 
-        private void GymInit()
-        { 
-            CreateTextBox("Hello world", 10f, Color.blue, new Vector3(5.5236f, 2.75f, 11.3364f), Quaternion.Euler(0, 30.5f, 0));
-            
-            Calls.Create.NewButton(new Vector3(2.4795f, 0.4392f, -3.5319f), new Quaternion(0, 0f, 0, 0));
-        }
+        // private void GymInit()
+        // { 
+        //     CreateTextBox("Hello world", 10f, Color.blue, new Vector3(5.5236f, 2.75f, 11.3364f), Quaternion.Euler(0, 30.5f, 0));
+        //     
+        //     Calls.Create.NewButton(new Vector3(2.4795f, 0.4392f, -3.5319f), new Quaternion(0, 0f, 0, 0));
+        // }
 
         private void Map0Init()
         {
