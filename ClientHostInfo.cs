@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Il2CppSystem.Runtime.ConstrainedExecution;
 using MelonLoader;
 using BuildInfo = ClientHostInfo.BuildInfo;
 using RumbleModdingAPI;
@@ -78,9 +79,9 @@ namespace ClientHostInfo
         }
 
         private void GymInit()
-        {
-            Calls.Create.NewText("Hello world", 10f, Color.blue, new Vector3(5.5236f, 2.75f, 11.3364f), Quaternion.Euler(0, 30.5f, 0));
-
+        { 
+            CreateTextBox("Hello world", 10f, Color.blue, new Vector3(5.5236f, 2.75f, 11.3364f), Quaternion.Euler(0, 30.5f, 0));
+            
             Calls.Create.NewButton(new Vector3(2.4795f, 0.4392f, -3.5319f), new Quaternion(0, 0f, 0, 0));
         }
 
@@ -88,9 +89,9 @@ namespace ClientHostInfo
         {
             if (Calls.Players.IsHost())
             {
-                _infoPanel = Calls.Create.NewText("Host", 10f, Color.yellow,
+                _infoPanel = CreateTextBox("Host", 10f, Color.yellow,
                     new Vector3(0f, 2.75f, -11f), Quaternion.Euler(0, 183f, 0)); 
-                
+
                 // _infoPanel.transform.parent = (GameObject.Find("/Health").transform);
 
                 MelonLogger.Warning("Text position: " + _infoPanel.transform.localPosition);
@@ -98,7 +99,7 @@ namespace ClientHostInfo
             }
             else
             {
-                _infoPanel = Calls.Create.NewText("Client", 10f, Color.yellow, 
+                _infoPanel = CreateTextBox("Client", 10f, Color.yellow, 
                     new Vector3(0f, 2.75f, 11f), Quaternion.Euler(0, 12, 0));
                 
                 // _infoPanel.transform.parent = (GameObject.Find("/Health").transform);
@@ -112,14 +113,27 @@ namespace ClientHostInfo
         {
             if (Calls.Players.IsHost())
             {
-                _infoPanel = Calls.Create.NewText("Host", 10f, Color.yellow, 
-                    new Vector3(0 ,3, 9), Quaternion.Euler(0, 30.5f, 0));
+                _infoPanel = CreateTextBox("Host", 10f, Color.yellow, 
+                    new Vector3(0 ,3, -9), Quaternion.Euler(0, 30.5f, 0));
             }
             else
             {
-                _infoPanel = Calls.Create.NewText("Client", 10f, Color.yellow, 
-                    new Vector3(0 ,3, -9), Quaternion.Euler(0, 12, 0));
+                _infoPanel = CreateTextBox("Client", 10f, Color.yellow, 
+                    new Vector3(0 ,3, 9), Quaternion.Euler(0, 12, 0));
             }
+        }
+
+
+        private static GameObject CreateTextBox(String text,float textSize , Color color , Vector3 vector, Quaternion rotation)
+        {
+            GameObject gameObject = Calls.Create.NewText(text, textSize, color, 
+                new Vector3(), Quaternion.Euler(0,0,0));
+
+            gameObject.transform.position = vector;
+            gameObject.transform.rotation = rotation;
+
+            return gameObject;
+
         }
     }
 }
