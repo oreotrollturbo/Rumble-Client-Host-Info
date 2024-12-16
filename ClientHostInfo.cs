@@ -90,22 +90,12 @@ namespace ClientHostInfo
             if (Calls.Players.IsHost())
             {
                 _infoPanel = CreateTextBox("Host", 10f, Color.yellow,
-                    new Vector3(0f, 2.75f, -11f), Quaternion.Euler(0, 183f, 0)); 
-
-                // _infoPanel.transform.parent = (GameObject.Find("/Health").transform);
-
-                MelonLogger.Warning("Text position: " + _infoPanel.transform.localPosition);
-                MelonLogger.Warning("Scene: " + _currentSceneName);
+                    new Vector3(0f, 3.75f, -11f), Quaternion.Euler(0, 183f, 0)); 
             }
             else
             {
                 _infoPanel = CreateTextBox("Client", 10f, Color.yellow, 
-                    new Vector3(0f, 2.75f, 11f), Quaternion.Euler(0, 12, 0));
-                
-                // _infoPanel.transform.parent = (GameObject.Find("/Health").transform);
-                
-                MelonLogger.Warning("Text position: " + _infoPanel.transform.localPosition);
-                MelonLogger.Warning("Scene: " + _currentSceneName);
+                    new Vector3(0f, 3.75f, 11f), Quaternion.Euler(0, 12, 0));
             }
         }
 
@@ -114,12 +104,12 @@ namespace ClientHostInfo
             if (Calls.Players.IsHost())
             {
                 _infoPanel = CreateTextBox("Host", 10f, Color.yellow, 
-                    new Vector3(0 ,3, -9), Quaternion.Euler(0, 30.5f, 0));
+                    new Vector3(0 ,3.75f, -9), Quaternion.Euler(0, 30.5f, 0));
             }
             else
             {
                 _infoPanel = CreateTextBox("Client", 10f, Color.yellow, 
-                    new Vector3(0 ,3, 9), Quaternion.Euler(0, 12, 0));
+                    new Vector3(0 ,3.75f, 9), Quaternion.Euler(0, 12, 0));
             }
         }
 
