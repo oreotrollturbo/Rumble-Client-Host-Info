@@ -14,7 +14,7 @@ namespace ClientHostInfo
     public static class BuildInfo
     {
         public const string ModName = "Host info";
-        public const string ModVersion = "1.0";
+        public const string ModVersion = "1.0.1";
         public const string Author = "oreotrollturbo";
     }
 
