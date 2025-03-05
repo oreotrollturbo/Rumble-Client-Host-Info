@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Il2CppSystem.Runtime.ConstrainedExecution;
 using MelonLoader;
 using BuildInfo = ClientHostInfo.BuildInfo;
 using RumbleModdingAPI;
@@ -13,12 +12,12 @@ namespace ClientHostInfo
 {
     public static class BuildInfo
     {
-        public const string ModName = "Host info";
-        public const string ModVersion = "1.0.1";
+        public const string ModName = "Client Host info";
+        public const string ModVersion = "1.0.2";
         public const string Author = "oreotrollturbo";
     }
 
-    public class TestMod : MelonMod
+    public class TestMod : MelonMod 
     {
         private static string? _currentSceneName;
 
@@ -36,16 +35,10 @@ namespace ClientHostInfo
 
         private void SceneLoaded()
         {
-            if (_currentSceneName is "Map0" or "Map1")
-            {
-                MelonCoroutines.Start(DisableInfoPanelAfterDelay(5f)); // Start coroutine to disable the info panel
-            }
-
-            // Start a coroutine to wait 2 seconds before executing the switch logic
-            MelonCoroutines.Start(WaitAndHandleSceneSwitch(1f));
+            MelonCoroutines.Start(InitializeMapTextBoxes(1f));
         }
 
-        private IEnumerator WaitAndHandleSceneSwitch(float delay)
+        private IEnumerator InitializeMapTextBoxes(float delay)
         {
             yield return new WaitForSeconds(delay);
 
@@ -64,7 +57,7 @@ namespace ClientHostInfo
                     break;
             }
         }
-        private IEnumerator DisableInfoPanelAfterDelay(float delay)
+        private IEnumerator MoveInfoPanelAfterDelay(float delay,Vector3 vector3, Quaternion quaternion)
         {
             
             yield return new WaitForSeconds(delay);
@@ -75,21 +68,15 @@ namespace ClientHostInfo
                 yield break; // Exit the coroutine if no panel exists
             }
 
-            _infoPanel.SetActive(false);
+            _infoPanel.transform.position = vector3;
+            _infoPanel.transform.rotation = quaternion;
         }
-
-        // private void GymInit()
-        // { 
-        //     CreateTextBox("Hello world", 10f, Color.blue, new Vector3(5.5236f, 2.75f, 11.3364f), Quaternion.Euler(0, 30.5f, 0));
-        //     
-        //     Calls.Create.NewButton(new Vector3(2.4795f, 0.4392f, -3.5319f), new Quaternion(0, 0f, 0, 0));
-        // }
 
         private void Map0Init()
         {
             if (Calls.Players.IsHost())
             {
-                _infoPanel = CreateTextBox("Host", 10f, Color.yellow,
+                _infoPanel = CreateTextBox("Host", 10f, Color.yellow, 
                     new Vector3(0f, 3.75f, -11f), Quaternion.Euler(0, 183f, 0)); 
             }
             else
@@ -97,6 +84,9 @@ namespace ClientHostInfo
                 _infoPanel = CreateTextBox("Client", 10f, Color.yellow, 
                     new Vector3(0f, 3.75f, 11f), Quaternion.Euler(0, 12, 0));
             }
+            
+            MelonCoroutines.Start(MoveInfoPanelAfterDelay(5f,new Vector3(0f,2f,-18f),
+                Quaternion.Euler(0, 183f, 0))); // Start coroutine to disable the info panel
         }
 
         private void Map1Init()
@@ -104,16 +94,18 @@ namespace ClientHostInfo
             if (Calls.Players.IsHost())
             {
                 _infoPanel = CreateTextBox("Host", 10f, Color.yellow, 
-                    new Vector3(0 ,3.75f, -9), Quaternion.Euler(0, 30.5f, 0));
+                    new Vector3(0 ,3.75f, -9), Quaternion.Euler(0, 183f, 0));
             }
             else
             {
                 _infoPanel = CreateTextBox("Client", 10f, Color.yellow, 
                     new Vector3(0 ,3.75f, 9), Quaternion.Euler(0, 12, 0));
             }
+            
+            MelonCoroutines.Start(MoveInfoPanelAfterDelay(5f,new Vector3(0 ,3.75f, -10.7f),
+                Quaternion.Euler(0, 183f, 0))); // Start coroutine to disable the info panel
         }
-
-
+        
         private static GameObject CreateTextBox(String text,float textSize , Color color , Vector3 vector, Quaternion rotation)
         {
             GameObject gameObject = Calls.Create.NewText(text, textSize, color, 
